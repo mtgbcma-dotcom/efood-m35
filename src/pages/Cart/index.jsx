@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import Footer from '../../components/Footer'
 import {
-  clearCart,
   decreaseQuantity,
   increaseQuantity,
   removeFromCart,
@@ -11,32 +10,29 @@ import {
 } from '../../store/reducers/cart'
 
 import {
-  CartHeader,
-  CartHeaderContent,
-  Brand,
+  Header,
+  HeaderContent,
   BackLink,
+  Brand,
   Main,
   Title,
-  EmptyCart,
+  Empty,
   EmptyLink,
-  CartList,
-  CartItem,
-  ProductImage,
-  ProductInfo,
-  ProductName,
-  ProductPrice,
-  QuantityArea,
+  List,
+  Item,
+  Image,
+  Info,
+  Name,
+  Price,
+  Quantity,
   QuantityButton,
-  QuantityValue,
   RemoveButton,
   Summary,
-  SummaryRow,
-  TotalValue,
-  ClearButton,
+  Total,
   CheckoutLink
 } from './styles'
 
-const formatPrice = (value) =>
+const money = (value) =>
   new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL'
@@ -49,36 +45,34 @@ const Cart = () => {
 
   return (
     <>
-      <CartHeader>
-        <CartHeaderContent className="container">
+      <Header>
+        <HeaderContent className="container">
           <BackLink to="/">Restaurantes</BackLink>
           <Brand to="/">efood</Brand>
           <span>Carrinho</span>
-        </CartHeaderContent>
-      </CartHeader>
+        </HeaderContent>
+      </Header>
 
       <Main className="container">
         <Title>Seu carrinho</Title>
 
         {items.length === 0 ? (
-          <EmptyCart>
+          <Empty>
             <p>Seu carrinho está vazio.</p>
             <EmptyLink to="/">Escolher restaurantes</EmptyLink>
-          </EmptyCart>
+          </Empty>
         ) : (
           <>
-            <CartList>
+            <List>
               {items.map((item) => (
-                <CartItem key={item.id}>
-                  <ProductImage src={item.foto} alt={item.nome} />
+                <Item key={item.id}>
+                  <Image src={item.foto} alt={item.nome} />
 
-                  <ProductInfo>
-                    <ProductName>{item.nome}</ProductName>
-                    <ProductPrice>
-                      {formatPrice(item.preco)}
-                    </ProductPrice>
+                  <Info>
+                    <Name>{item.nome}</Name>
+                    <Price>{money(item.preco)}</Price>
 
-                    <QuantityArea>
+                    <Quantity>
                       <QuantityButton
                         onClick={() =>
                           dispatch(decreaseQuantity(item.id))
@@ -86,7 +80,9 @@ const Cart = () => {
                       >
                         −
                       </QuantityButton>
-                      <QuantityValue>{item.quantity}</QuantityValue>
+
+                      <strong>{item.quantity}</strong>
+
                       <QuantityButton
                         onClick={() =>
                           dispatch(increaseQuantity(item.id))
@@ -94,8 +90,8 @@ const Cart = () => {
                       >
                         +
                       </QuantityButton>
-                    </QuantityArea>
-                  </ProductInfo>
+                    </Quantity>
+                  </Info>
 
                   <RemoveButton
                     onClick={() =>
@@ -104,25 +100,19 @@ const Cart = () => {
                   >
                     Remover
                   </RemoveButton>
-                </CartItem>
+                </Item>
               ))}
-            </CartList>
+            </List>
 
             <Summary>
-              <SummaryRow>
-                <strong>Valor total</strong>
-                <TotalValue>{formatPrice(total)}</TotalValue>
-              </SummaryRow>
+              <Total>
+                <span>Valor total</span>
+                <strong>{money(total)}</strong>
+              </Total>
 
               <CheckoutLink to="/checkout">
                 Continuar para entrega
               </CheckoutLink>
-
-              <ClearButton
-                onClick={() => dispatch(clearCart())}
-              >
-                Limpar carrinho
-              </ClearButton>
             </Summary>
           </>
         )}

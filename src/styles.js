@@ -17,16 +17,12 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  html {
-    scroll-behavior: smooth;
-  }
-
   body {
     min-width: 320px;
+    min-height: 100vh;
     background: ${colors.cream};
     color: ${colors.salmon};
-    font-family: Roboto, Arial, Helvetica, sans-serif;
-    -webkit-font-smoothing: antialiased;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   body.modal-open {
@@ -34,8 +30,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   button,
-  input,
-  textarea {
+  input {
     font: inherit;
   }
 
@@ -44,8 +39,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   img {
-    max-width: 100%;
     display: block;
+    max-width: 100%;
   }
 
   a {

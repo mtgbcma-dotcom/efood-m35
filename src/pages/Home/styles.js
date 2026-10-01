@@ -1,35 +1,21 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
 
 export const Main = styled.main`
   min-height: 400px;
-  padding-top: 80px;
+  padding-top: 70px;
 `
 
-export const RestaurantsGrid = styled.section`
+export const Grid = styled.section`
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 48px 80px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 48px;
 
-  @media (max-width: 820px) {
+  @media (max-width: 760px) {
     grid-template-columns: 1fr;
   }
 `
 
-export const Message = styled.div`
-  width: min(600px, calc(100% - 32px));
-  margin: 0 auto;
-  padding: 32px;
-  border: 1px solid ${colors.salmon};
-  background: ${colors.white};
+export const Message = styled.p`
   text-align: center;
-`
-
-export const RetryButton = styled.button`
-  display: block;
-  margin: 20px auto 0;
-  padding: 8px 16px;
-  border: 0;
-  background: ${colors.salmon};
-  color: ${colors.white};
+  font-size: 20px;
 `

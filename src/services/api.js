@@ -14,7 +14,7 @@ export async function getRestaurants() {
   return response.json()
 }
 
-export async function createOrder(payload) {
+export async function checkoutOrder(payload) {
   const response = await fetch(CHECKOUT_URL, {
     method: 'POST',
     headers: {
@@ -23,16 +23,16 @@ export async function createOrder(payload) {
     body: JSON.stringify(payload)
   })
 
-  const data = await response.json().catch(() => ({}))
+  const result = await response.json().catch(() => ({}))
 
   if (!response.ok) {
     const message =
-      data?.message ||
-      data?.error ||
-      'Não foi possível concluir o pedido.'
+      result?.message ||
+      result?.error ||
+      `Erro ao concluir pedido (${response.status}).`
 
     throw new Error(message)
   }
 
-  return data
+  return result
 }

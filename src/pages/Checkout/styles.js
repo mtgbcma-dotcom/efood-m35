@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { colors } from '../../styles'
 
 export const Header = styled.header`
-  min-height: 140px;
   background: ${colors.softCream};
 `
 
@@ -14,6 +13,10 @@ export const HeaderContent = styled.div`
   align-items: center;
   font-weight: 900;
 
+  a {
+    text-decoration: none;
+  }
+
   span {
     justify-self: end;
   }
@@ -23,19 +26,31 @@ export const Brand = styled(Link)`
   font-size: 38px;
   font-weight: 900;
   letter-spacing: -3px;
-  text-decoration: none;
-`
-
-export const BackLink = styled(Link)`
-  text-decoration: none;
 `
 
 export const Main = styled.main`
-  padding-top: 56px;
+  min-height: 500px;
+  padding-top: 50px;
 `
 
 export const Title = styled.h1`
-  margin-bottom: 32px;
+  margin-bottom: 28px;
+`
+
+export const Empty = styled.section`
+  padding: 40px;
+  border: 1px solid ${colors.salmon};
+  background: white;
+  text-align: center;
+`
+
+export const BackButton = styled(Link)`
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 14px;
+  background: ${colors.salmon};
+  color: white;
+  text-decoration: none;
 `
 
 export const Form = styled.form`
@@ -50,8 +65,7 @@ export const Section = styled.section`
 `
 
 export const SectionTitle = styled.h2`
-  margin-bottom: 20px;
-  font-size: 20px;
+  margin-bottom: 16px;
 `
 
 export const Grid = styled.div`
@@ -59,11 +73,7 @@ export const Grid = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 
-  & + & {
-    margin-top: 16px;
-  }
-
-  @media (max-width: 600px) {
+  @media (max-width: 650px) {
     grid-template-columns: 1fr;
   }
 `
@@ -75,47 +85,33 @@ export const Field = styled.div`
 export const Label = styled.label`
   display: block;
   margin-bottom: 6px;
-  font-size: 14px;
   font-weight: 700;
 `
 
 export const Input = styled.input`
   width: 100%;
-  min-height: 40px;
+  min-height: 42px;
   padding: 0 10px;
-  border: 2px solid transparent;
-  outline: 0;
-
-  &:focus {
-    border-color: ${colors.softCream};
-  }
-`
-
-export const ErrorText = styled.p`
-  padding: 12px;
-  border: 1px solid ${colors.salmon};
-  background: white;
-  color: ${colors.salmon};
+  border: 0;
 `
 
 export const Summary = styled.div`
-  display: flex;
-  justify-content: space-between;
   padding: 20px;
   border: 1px solid ${colors.salmon};
   background: white;
   font-size: 18px;
 `
 
+export const ErrorText = styled.p`
+  padding: 14px;
+  border: 1px solid ${colors.salmon};
+  background: white;
+`
+
 export const SubmitButton = styled.button`
-  min-height: 44px;
+  min-height: 46px;
   border: 0;
   background: ${colors.salmon};
   color: white;
   font-weight: 900;
-
-  &:disabled {
-    opacity: 0.7;
-    cursor: wait;
-  }
 `

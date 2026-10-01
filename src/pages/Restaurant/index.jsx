@@ -6,20 +6,23 @@ import DishCard from '../../components/DishCard'
 import Footer from '../../components/Footer'
 import ProductModal from '../../components/ProductModal'
 import { getRestaurants } from '../../services/api'
-import { addToCart, selectCartCount } from '../../store/reducers/cart'
+import {
+  addToCart,
+  selectCartCount
+} from '../../store/reducers/cart'
 
 import {
-  TopHeader,
-  TopHeaderContent,
-  HeaderLink,
+  Header,
+  HeaderContent,
+  BackLink,
   Brand,
   CartLink,
-  RestaurantHero,
-  RestaurantHeroContent,
+  Hero,
+  HeroContent,
   Category,
-  RestaurantName,
-  MenuGrid,
-  PageMain,
+  Name,
+  Main,
+  Menu,
   Message
 } from './styles'
 
@@ -29,83 +32,62 @@ const Restaurant = () => {
   const cartCount = useSelector(selectCartCount)
 
   const [restaurant, setRestaurant] = useState(null)
-  const [selectedDish, setSelectedDish] = useState(null)
+  const [dish, setDish] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [notFound, setNotFound] = useState(false)
-  const [error, setError] = useState('')
 
   useEffect(() => {
-    const loadRestaurant = async () => {
-      try {
-        setLoading(true)
-        const restaurants = await getRestaurants()
-        const found = restaurants.find(
-          (item) => String(item.id) === String(id)
+    getRestaurants()
+      .then((list) => {
+        setRestaurant(
+          list.find((item) => String(item.id) === String(id)) || null
         )
-
-        if (!found) {
-          setNotFound(true)
-          return
-        }
-
-        setRestaurant(found)
-      } catch (err) {
-        setError(err.message)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    loadRestaurant()
+      })
+      .finally(() => setLoading(false))
   }, [id])
 
-  const closeModal = useCallback(() => {
-    setSelectedDish(null)
-  }, [])
+  const closeModal = useCallback(() => setDish(null), [])
 
-  if (notFound) return <Navigate to="/" replace />
   if (loading) return <Message>Carregando restaurante...</Message>
-  if (error) return <Message>{error}</Message>
-  if (!restaurant) return null
+  if (!restaurant) return <Navigate to="/" replace />
 
   return (
     <>
-      <TopHeader>
-        <TopHeaderContent className="container">
-          <HeaderLink to="/">Restaurantes</HeaderLink>
+      <Header>
+        <HeaderContent className="container">
+          <BackLink to="/">Restaurantes</BackLink>
           <Brand to="/">efood</Brand>
           <CartLink to="/carrinho">
             {cartCount} produto(s) no carrinho
           </CartLink>
-        </TopHeaderContent>
-      </TopHeader>
+        </HeaderContent>
+      </Header>
 
-      <RestaurantHero $image={restaurant.capa}>
-        <RestaurantHeroContent className="container">
+      <Hero $image={restaurant.capa}>
+        <HeroContent className="container">
           <Category>{restaurant.tipo}</Category>
-          <RestaurantName>{restaurant.titulo}</RestaurantName>
-        </RestaurantHeroContent>
-      </RestaurantHero>
+          <Name>{restaurant.titulo}</Name>
+        </HeroContent>
+      </Hero>
 
-      <PageMain>
-        <MenuGrid className="container">
-          {restaurant.cardapio.map((dish) => (
+      <Main>
+        <Menu className="container">
+          {restaurant.cardapio.map((item) => (
             <DishCard
-              key={dish.id}
-              dish={dish}
-              onBuy={setSelectedDish}
+              key={item.id}
+              dish={item}
+              onBuy={setDish}
             />
           ))}
-        </MenuGrid>
-      </PageMain>
+        </Menu>
+      </Main>
 
       <Footer />
 
       <ProductModal
-        dish={selectedDish}
+        dish={dish}
         onClose={closeModal}
-        onAdd={(dish) => {
-          dispatch(addToCart(dish))
+        onAdd={(product) => {
+          dispatch(addToCart(product))
           closeModal()
         }}
       />

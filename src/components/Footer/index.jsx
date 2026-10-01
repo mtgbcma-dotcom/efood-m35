@@ -2,9 +2,7 @@ import {
   FooterArea,
   FooterContent,
   FooterBrand,
-  Socials,
-  SocialLink,
-  Copyright
+  FooterText
 } from './styles'
 
 const Footer = () => (
@@ -12,17 +10,9 @@ const Footer = () => (
     <FooterContent className="container">
       <FooterBrand to="/">efood</FooterBrand>
 
-      <Socials aria-label="Redes sociais">
-        <SocialLink href="#" aria-label="Instagram">◎</SocialLink>
-        <SocialLink href="#" aria-label="Facebook">f</SocialLink>
-        <SocialLink href="#" aria-label="Twitter">♥</SocialLink>
-      </Socials>
-
-      <Copyright>
+      <FooterText>
         A eFood é uma plataforma para divulgação de estabelecimentos.
-        A responsabilidade pela entrega e qualidade dos produtos é dos
-        restaurantes.
-      </Copyright>
+      </FooterText>
     </FooterContent>
   </FooterArea>
 )

@@ -1,44 +1,91 @@
-import { Navigate, useLocation } from 'react-router-dom'
+import { useEffect, useMemo } from 'react'
+import { useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 
 import Footer from '../../components/Footer'
+import { clearCart } from '../../store/reducers/cart'
 
 import {
   Header,
   HeaderContent,
   Brand,
   Main,
-  ConfirmationCard,
-  SuccessMark,
+  Card,
+  Success,
   Title,
-  OrderNumber,
+  Order,
   Text,
-  InfoBox,
-  HomeLink
+  Info,
+  HomeButton
 } from './styles'
 
-const formatPrice = (value) =>
+const money = (value) =>
   new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL'
-  }).format(value)
-
-const getOrderId = (response) =>
-  response?.orderId ??
-  response?.orderID ??
-  response?.order_id ??
-  response?.id ??
-  response?.pedidoId ??
-  'confirmado'
+  }).format(value || 0)
 
 const Confirmation = () => {
   const location = useLocation()
-  const state = location.state
+  const dispatch = useDispatch()
 
-  if (!state?.response) {
-    return <Navigate to="/" replace />
+  const confirmation = useMemo(() => {
+    if (location.state?.response) {
+      return location.state
+    }
+
+    try {
+      const stored = sessionStorage.getItem(
+        'efood-order-confirmation'
+      )
+
+      return stored ? JSON.parse(stored) : null
+    } catch {
+      return null
+    }
+  }, [location.state])
+
+  useEffect(() => {
+    if (confirmation?.response) {
+      dispatch(clearCart())
+    }
+  }, [confirmation, dispatch])
+
+  if (!confirmation?.response) {
+    return (
+      <>
+        <Header>
+          <HeaderContent className="container">
+            <Brand to="/">efood</Brand>
+          </HeaderContent>
+        </Header>
+
+        <Main className="container">
+          <Card>
+            <Title>Nenhum pedido confirmado.</Title>
+            <HomeButton to="/">
+              Voltar para restaurantes
+            </HomeButton>
+          </Card>
+        </Main>
+
+        <Footer />
+      </>
+    )
   }
 
-  const orderId = getOrderId(state.response)
+  const {
+    response,
+    delivery,
+    total
+  } = confirmation
+
+  const orderId =
+    response?.orderId ??
+    response?.orderID ??
+    response?.id ??
+    response?.pedidoId ??
+    'confirmado'
 
   return (
     <>
@@ -49,50 +96,45 @@ const Confirmation = () => {
       </Header>
 
       <Main className="container">
-        <ConfirmationCard>
-          <SuccessMark>✓</SuccessMark>
+        <Card>
+          <Success>✓</Success>
 
           <Title>Pedido realizado com sucesso!</Title>
 
-          <OrderNumber>
-            Pedido nº {String(orderId)}
-          </OrderNumber>
+          <Order>Pedido nº {String(orderId)}</Order>
 
           <Text>
-            Obrigado pela preferência. Assim que o pedido estiver pronto,
-            ele seguirá para o endereço informado.
+            Obrigado pela preferência. Seu pedido foi recebido
+            pela API e está confirmado.
           </Text>
 
-          <InfoBox>
+          <Info>
             <p>
               <strong>Recebedor:</strong>{' '}
-              {state.delivery?.receiver}
+              {delivery?.receiver}
             </p>
 
             <p>
-              <strong>Entrega:</strong>{' '}
-              {state.delivery?.address?.description},{' '}
-              {state.delivery?.address?.number} -{' '}
-              {state.delivery?.address?.city}
+              <strong>Endereço:</strong>{' '}
+              {delivery?.address?.description},{' '}
+              {delivery?.address?.number} -{' '}
+              {delivery?.address?.city}
             </p>
 
             <p>
-              <strong>Valor:</strong>{' '}
-              {formatPrice(state.total)}
+              <strong>Valor:</strong> {money(total)}
             </p>
 
             <p>
               <strong>Resposta da API:</strong>{' '}
-              {state.response?.orderId
-                ? `orderId: ${state.response.orderId}`
-                : JSON.stringify(state.response)}
+              {JSON.stringify(response)}
             </p>
-          </InfoBox>
+          </Info>
 
-          <HomeLink to="/">
+          <HomeButton to="/">
             Voltar para restaurantes
-          </HomeLink>
-        </ConfirmationCard>
+          </HomeButton>
+        </Card>
       </Main>
 
       <Footer />

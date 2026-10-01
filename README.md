@@ -1,41 +1,42 @@
-# eFood - Exercício M38
+# eFood - M38
 
-Continuação do projeto eFood.
+Projeto completo do exercício M38.
 
-## Requisitos atendidos
-
+## Tecnologias
 - React
 - React Router
-- Styled Components
-- AJAX com `fetch`
 - Redux Toolkit
-- carrinho com total
-- página de entrega
-- formulário de pagamento
-- POST para a API de checkout da EBAC
-- tela de confirmação do pedido
-- confirmação preenchida com a resposta da API
-- deploy preparado para Vercel
+- React Redux
+- Styled Components
+- Fetch API
+
+## Funcionalidades
+- restaurantes carregados da API EBAC;
+- cardápio por restaurante;
+- modal de produto;
+- carrinho controlado por Redux;
+- controle de quantidade;
+- soma do total;
+- página de entrega;
+- pagamento;
+- POST para a API de checkout;
+- tela de confirmação usando a resposta da API;
+- carrinho limpo apenas depois que a confirmação é exibida.
 
 ## APIs
-
 Restaurantes:
-
-`https://api-ebac.vercel.app/api/efood/restaurantes`
+https://api-ebac.vercel.app/api/efood/restaurantes
 
 Checkout:
-
-`https://api-ebac.vercel.app/api/efood/checkout`
+https://api-ebac.vercel.app/api/efood/checkout
 
 ## Executar
-
 ```bash
 npm install
 npm start
 ```
 
 ## Build
-
 ```bash
 npm run build
 ```

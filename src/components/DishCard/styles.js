@@ -7,38 +7,32 @@ export const Card = styled.article`
   flex-direction: column;
   padding: 8px;
   background: ${colors.salmon};
-  color: ${colors.cream};
+  color: white;
 `
 
-export const DishImage = styled.img`
+export const Image = styled.img`
   width: 100%;
-  height: 167px;
+  height: 170px;
   object-fit: cover;
 `
 
-export const DishTitle = styled.h2`
-  margin-top: 8px;
-  font-size: 16px;
-  font-weight: 900;
+export const Title = styled.h2`
+  margin-top: 10px;
+  font-size: 18px;
 `
 
-export const DishDescription = styled.p`
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
+export const Description = styled.p`
   margin-top: 8px;
   font-size: 14px;
-  line-height: 1.45;
+  line-height: 1.4;
 `
 
-export const BuyButton = styled.button`
+export const Button = styled.button`
   width: 100%;
-  min-height: 36px;
   margin-top: auto;
+  padding: 10px;
   border: 0;
   background: ${colors.softCream};
   color: ${colors.salmon};
-  font-size: 14px;
   font-weight: 700;
 `

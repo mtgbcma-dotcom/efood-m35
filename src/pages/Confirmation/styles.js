@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { colors } from '../../styles'
 
 export const Header = styled.header`
-  min-height: 140px;
   background: ${colors.softCream};
 `
 
@@ -15,18 +14,18 @@ export const HeaderContent = styled.div`
 `
 
 export const Brand = styled(Link)`
+  text-decoration: none;
   font-size: 38px;
   font-weight: 900;
   letter-spacing: -3px;
-  text-decoration: none;
 `
 
 export const Main = styled.main`
-  min-height: 480px;
-  padding-top: 64px;
+  min-height: 500px;
+  padding-top: 60px;
 `
 
-export const ConfirmationCard = styled.section`
+export const Card = styled.section`
   max-width: 720px;
   margin: 0 auto;
   padding: 40px;
@@ -35,7 +34,7 @@ export const ConfirmationCard = styled.section`
   text-align: center;
 `
 
-export const SuccessMark = styled.div`
+export const Success = styled.div`
   width: 64px;
   height: 64px;
   display: grid;
@@ -45,35 +44,33 @@ export const SuccessMark = styled.div`
   background: ${colors.success};
   color: white;
   font-size: 34px;
-  font-weight: 900;
 `
 
 export const Title = styled.h1`
   font-size: 28px;
 `
 
-export const OrderNumber = styled.h2`
+export const Order = styled.h2`
   margin-top: 16px;
-  font-size: 22px;
 `
 
 export const Text = styled.p`
   margin-top: 18px;
-  line-height: 1.6;
+  line-height: 1.5;
   color: ${colors.muted};
 `
 
-export const InfoBox = styled.div`
+export const Info = styled.div`
   display: grid;
   gap: 10px;
   margin-top: 28px;
   padding: 20px;
   background: ${colors.softCream};
   text-align: left;
-  line-height: 1.5;
+  overflow-wrap: anywhere;
 `
 
-export const HomeLink = styled(Link)`
+export const HomeButton = styled(Link)`
   display: inline-block;
   margin-top: 28px;
   padding: 12px 18px;

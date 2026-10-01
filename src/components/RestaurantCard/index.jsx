@@ -1,22 +1,21 @@
 import {
   Card,
   ImageArea,
-  RestaurantImage,
+  Image,
   Tags,
   Tag,
   Content,
   TitleRow,
   Title,
   Rating,
-  Star,
   Description,
-  DetailsButton
+  Button
 } from './styles'
 
 const RestaurantCard = ({ restaurant }) => (
   <Card>
     <ImageArea>
-      <RestaurantImage src={restaurant.capa} alt={restaurant.titulo} />
+      <Image src={restaurant.capa} alt={restaurant.titulo} />
 
       <Tags>
         {restaurant.destacado && <Tag>Destaque da semana</Tag>}
@@ -27,18 +26,14 @@ const RestaurantCard = ({ restaurant }) => (
     <Content>
       <TitleRow>
         <Title>{restaurant.titulo}</Title>
-
-        <Rating>
-          {restaurant.avaliacao.toFixed(1)}
-          <Star aria-hidden="true">★</Star>
-        </Rating>
+        <Rating>{restaurant.avaliacao.toFixed(1)} ★</Rating>
       </TitleRow>
 
       <Description>{restaurant.descricao}</Description>
 
-      <DetailsButton to={`/restaurante/${restaurant.id}`}>
+      <Button to={`/restaurante/${restaurant.id}`}>
         Saiba mais
-      </DetailsButton>
+      </Button>
     </Content>
   </Card>
 )

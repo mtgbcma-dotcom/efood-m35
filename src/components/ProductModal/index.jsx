@@ -1,14 +1,15 @@
 import { useEffect } from 'react'
+
 import {
   Overlay,
-  ModalBox,
-  CloseButton,
-  ProductImage,
-  ProductContent,
-  ProductTitle,
-  ProductDescription,
+  Box,
+  Close,
+  Image,
+  Content,
+  Title,
+  Description,
   Portion,
-  AddButton
+  Button
 } from './styles'
 
 const formatPrice = (value) =>
@@ -19,46 +20,40 @@ const formatPrice = (value) =>
 
 const ProductModal = ({ dish, onClose, onAdd }) => {
   useEffect(() => {
-    if (!dish) return undefined
+    if (!dish) return
 
     document.body.classList.add('modal-open')
 
-    const handleKeyDown = (event) => {
-      if (event.key === 'Escape') onClose()
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-
     return () => {
       document.body.classList.remove('modal-open')
-      window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [dish, onClose])
+  }, [dish])
 
   if (!dish) return null
 
   return (
     <Overlay
-      role="dialog"
-      aria-modal="true"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) onClose()
       }}
     >
-      <ModalBox>
-        <CloseButton type="button" onClick={onClose}>×</CloseButton>
-        <ProductImage src={dish.foto} alt={dish.nome} />
+      <Box>
+        <Close type="button" onClick={onClose}>
+          ×
+        </Close>
 
-        <ProductContent>
-          <ProductTitle>{dish.nome}</ProductTitle>
-          <ProductDescription>{dish.descricao}</ProductDescription>
+        <Image src={dish.foto} alt={dish.nome} />
+
+        <Content>
+          <Title>{dish.nome}</Title>
+          <Description>{dish.descricao}</Description>
           <Portion>Serve: {dish.porcao}</Portion>
 
-          <AddButton type="button" onClick={() => onAdd(dish)}>
+          <Button type="button" onClick={() => onAdd(dish)}>
             Adicionar ao carrinho - {formatPrice(dish.preco)}
-          </AddButton>
-        </ProductContent>
-      </ModalBox>
+          </Button>
+        </Content>
+      </Box>
     </Overlay>
   )
 }
