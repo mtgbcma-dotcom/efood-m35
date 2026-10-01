@@ -42,8 +42,4 @@ export const BuyButton = styled.button`
   color: ${colors.salmon};
   font-size: 14px;
   font-weight: 700;
-
-  &:hover {
-    filter: brightness(0.97);
-  }
 `

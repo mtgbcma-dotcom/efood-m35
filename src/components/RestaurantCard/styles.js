@@ -91,8 +91,4 @@ export const DetailsButton = styled(Link)`
   text-decoration: none;
   font-size: 14px;
   font-weight: 700;
-
-  &:hover {
-    filter: brightness(0.95);
-  }
 `

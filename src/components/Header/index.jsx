@@ -1,19 +1,36 @@
-import { Brand, Hero, HeroContent, HeroTitle } from './styles'
+import { useSelector } from 'react-redux'
 
-const Header = () => (
-  <Hero>
-    <HeroContent className="container">
-      <Brand to="/" aria-label="eFood - página inicial">
-        efood
-      </Brand>
+import { selectCartCount } from '../../store/reducers/cart'
+import {
+  Brand,
+  Hero,
+  HeroContent,
+  HeroTitle,
+  CartLink
+} from './styles'
 
-      <HeroTitle>
-        Viva experiências gastronômicas
-        <br />
-        no conforto da sua casa
-      </HeroTitle>
-    </HeroContent>
-  </Hero>
-)
+const Header = () => {
+  const cartCount = useSelector(selectCartCount)
+
+  return (
+    <Hero>
+      <HeroContent className="container">
+        <Brand to="/" aria-label="eFood - página inicial">
+          efood
+        </Brand>
+
+        <CartLink to="/carrinho">
+          Carrinho ({cartCount})
+        </CartLink>
+
+        <HeroTitle>
+          Viva experiências gastronômicas
+          <br />
+          no conforto da sua casa
+        </HeroTitle>
+      </HeroContent>
+    </Hero>
+  )
+}
 
 export default Header

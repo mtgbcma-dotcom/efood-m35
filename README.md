@@ -1,16 +1,21 @@
-# eFood - Exercício M36
+# eFood - Exercício M37
 
-Continuação do projeto eFood do M35.
+Continuação do projeto eFood.
 
 ## Requisitos atendidos
 
 - React
-- Styled Components
 - React Router
-- conteúdo carregado via AJAX com `fetch`
+- Styled Components
+- AJAX com `fetch`
 - API oficial da EBAC
 - modal de produto
-- navegação entre restaurantes
+- Redux Toolkit para o carrinho
+- página de carrinho
+- inclusão de produtos no carrinho
+- alteração de quantidade
+- remoção de produtos
+- total da compra calculado com base nos produtos e quantidades
 - deploy preparado para Vercel
 
 ## API
@@ -29,7 +34,3 @@ npm start
 ```bash
 npm run build
 ```
-
-## Vercel
-
-O projeto contém `vercel.json` para permitir acesso direto às rotas do React Router.

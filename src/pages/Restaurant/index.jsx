@@ -1,17 +1,22 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Navigate, useParams } from 'react-router-dom'
 
 import DishCard from '../../components/DishCard'
 import Footer from '../../components/Footer'
 import ProductModal from '../../components/ProductModal'
 import { getRestaurants } from '../../services/api'
+import {
+  addToCart,
+  selectCartCount
+} from '../../store/reducers/cart'
 
 import {
   TopHeader,
   TopHeaderContent,
   HeaderLink,
   Brand,
-  CartText,
+  CartLink,
   RestaurantHero,
   RestaurantHeroContent,
   Category,
@@ -23,10 +28,11 @@ import {
 
 const Restaurant = () => {
   const { id } = useParams()
+  const dispatch = useDispatch()
+  const cartCount = useSelector(selectCartCount)
 
   const [restaurant, setRestaurant] = useState(null)
   const [selectedDish, setSelectedDish] = useState(null)
-  const [cartCount, setCartCount] = useState(0)
   const [loading, setLoading] = useState(true)
   const [notFound, setNotFound] = useState(false)
   const [error, setError] = useState('')
@@ -62,27 +68,18 @@ const Restaurant = () => {
     setSelectedDish(null)
   }, [])
 
-  const addToCart = (dish) => {
-    setCartCount((current) => current + 1)
+  const handleAddToCart = (dish) => {
+    dispatch(addToCart(dish))
     setSelectedDish(null)
-    window.alert(`${dish.nome} foi adicionado ao carrinho.`)
   }
 
-  if (notFound) {
-    return <Navigate to="/" replace />
-  }
+  if (notFound) return <Navigate to="/" replace />
 
-  if (loading) {
-    return <Message>Carregando restaurante...</Message>
-  }
+  if (loading) return <Message>Carregando restaurante...</Message>
 
-  if (error) {
-    return <Message>{error}</Message>
-  }
+  if (error) return <Message>{error}</Message>
 
-  if (!restaurant) {
-    return null
-  }
+  if (!restaurant) return null
 
   return (
     <>
@@ -90,7 +87,9 @@ const Restaurant = () => {
         <TopHeaderContent className="container">
           <HeaderLink to="/">Restaurantes</HeaderLink>
           <Brand to="/">efood</Brand>
-          <CartText>{cartCount} produto(s) no carrinho</CartText>
+          <CartLink to="/carrinho">
+            {cartCount} produto(s) no carrinho
+          </CartLink>
         </TopHeaderContent>
       </TopHeader>
 
@@ -118,7 +117,7 @@ const Restaurant = () => {
       <ProductModal
         dish={selectedDish}
         onClose={closeModal}
-        onAdd={addToCart}
+        onAdd={handleAddToCart}
       />
     </>
   )

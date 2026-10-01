@@ -44,9 +44,10 @@ export const Brand = styled(Link)`
   letter-spacing: -3px;
 `
 
-export const CartText = styled.span`
+export const CartLink = styled(Link)`
   justify-self: end;
   color: ${colors.salmon};
+  text-decoration: none;
   font-size: 18px;
   font-weight: 900;
 

@@ -17,6 +17,7 @@ export const Hero = styled.header`
 
 export const HeroContent = styled.div`
   min-height: 384px;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,6 +33,21 @@ export const Brand = styled(Link)`
   font-weight: 900;
   letter-spacing: -3px;
   text-decoration: none;
+`
+
+export const CartLink = styled(Link)`
+  position: absolute;
+  top: 48px;
+  right: 0;
+  color: ${colors.salmon};
+  font-size: 16px;
+  font-weight: 900;
+  text-decoration: none;
+
+  @media (max-width: 650px) {
+    position: static;
+    margin-top: 16px;
+  }
 `
 
 export const HeroTitle = styled.h1`

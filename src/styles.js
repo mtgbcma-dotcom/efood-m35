@@ -5,7 +5,8 @@ export const colors = {
   cream: '#FFF8F2',
   softCream: '#FFEBD9',
   white: '#FFFFFF',
-  dark: '#1E1E1E'
+  dark: '#1E1E1E',
+  muted: '#6B5B5B'
 }
 
 export const GlobalStyle = createGlobalStyle`

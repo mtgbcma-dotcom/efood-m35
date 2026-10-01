@@ -38,9 +38,7 @@ const ProductModal = ({ dish, onClose, onAdd }) => {
     }
   }, [dish, onClose])
 
-  if (!dish) {
-    return null
-  }
+  if (!dish) return null
 
   const closeOnOverlay = (event) => {
     if (event.target === event.currentTarget) {
@@ -68,9 +66,7 @@ const ProductModal = ({ dish, onClose, onAdd }) => {
 
         <ProductContent>
           <ProductTitle>{dish.nome}</ProductTitle>
-
           <ProductDescription>{dish.descricao}</ProductDescription>
-
           <Portion>Serve: {dish.porcao}</Portion>
 
           <AddButton type="button" onClick={() => onAdd(dish)}>
