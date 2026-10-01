@@ -6,10 +6,7 @@ import DishCard from '../../components/DishCard'
 import Footer from '../../components/Footer'
 import ProductModal from '../../components/ProductModal'
 import { getRestaurants } from '../../services/api'
-import {
-  addToCart,
-  selectCartCount
-} from '../../store/reducers/cart'
+import { addToCart, selectCartCount } from '../../store/reducers/cart'
 
 import {
   TopHeader,
@@ -41,8 +38,6 @@ const Restaurant = () => {
     const loadRestaurant = async () => {
       try {
         setLoading(true)
-        setError('')
-
         const restaurants = await getRestaurants()
         const found = restaurants.find(
           (item) => String(item.id) === String(id)
@@ -68,17 +63,9 @@ const Restaurant = () => {
     setSelectedDish(null)
   }, [])
 
-  const handleAddToCart = (dish) => {
-    dispatch(addToCart(dish))
-    setSelectedDish(null)
-  }
-
   if (notFound) return <Navigate to="/" replace />
-
   if (loading) return <Message>Carregando restaurante...</Message>
-
   if (error) return <Message>{error}</Message>
-
   if (!restaurant) return null
 
   return (
@@ -117,7 +104,10 @@ const Restaurant = () => {
       <ProductModal
         dish={selectedDish}
         onClose={closeModal}
-        onAdd={handleAddToCart}
+        onAdd={(dish) => {
+          dispatch(addToCart(dish))
+          closeModal()
+        }}
       />
     </>
   )

@@ -6,12 +6,7 @@ import { colors } from '../../styles'
 export const Hero = styled.header`
   min-height: 384px;
   background:
-    radial-gradient(
-        circle at 20px 20px,
-        rgba(230, 103, 103, 0.08) 3px,
-        transparent 4px
-      )
-      0 0 / 42px 42px,
+    radial-gradient(circle at 20px 20px, rgba(230, 103, 103, 0.08) 3px, transparent 4px) 0 0 / 42px 42px,
     linear-gradient(135deg, #fff1e6, ${colors.softCream});
 `
 

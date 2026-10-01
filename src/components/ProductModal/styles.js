@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-
 import { colors } from '../../styles'
 
 export const Overlay = styled.div`
@@ -23,16 +22,11 @@ export const ModalBox = styled.div`
   color: ${colors.white};
 
   @media (max-width: 700px) {
-    max-height: 90vh;
-    overflow-y: auto;
     grid-template-columns: 1fr;
-    padding: 24px;
   }
 `
 
 export const CloseButton = styled.button`
-  width: 32px;
-  height: 32px;
   position: absolute;
   top: 8px;
   right: 8px;
@@ -40,7 +34,6 @@ export const CloseButton = styled.button`
   background: transparent;
   color: ${colors.white};
   font-size: 32px;
-  line-height: 1;
 `
 
 export const ProductImage = styled.img`
@@ -63,27 +56,21 @@ export const ProductContent = styled.div`
 export const ProductTitle = styled.h2`
   margin-bottom: 16px;
   font-size: 18px;
-  font-weight: 900;
 `
 
 export const ProductDescription = styled.p`
-  max-width: 650px;
-  font-size: 14px;
   line-height: 1.55;
 `
 
 export const Portion = styled.p`
   margin-top: 16px;
-  font-size: 14px;
 `
 
 export const AddButton = styled.button`
-  min-height: 32px;
   margin-top: 16px;
-  padding: 0 10px;
+  padding: 8px 10px;
   border: 0;
   background: ${colors.softCream};
   color: ${colors.salmon};
-  font-size: 14px;
   font-weight: 700;
 `

@@ -4,13 +4,7 @@ import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import RestaurantCard from '../../components/RestaurantCard'
 import { getRestaurants } from '../../services/api'
-
-import {
-  Main,
-  RestaurantsGrid,
-  Message,
-  RetryButton
-} from './styles'
+import { Main, RestaurantsGrid, Message, RetryButton } from './styles'
 
 const Home = () => {
   const [restaurants, setRestaurants] = useState([])
@@ -21,8 +15,7 @@ const Home = () => {
     try {
       setLoading(true)
       setError('')
-      const data = await getRestaurants()
-      setRestaurants(data)
+      setRestaurants(await getRestaurants())
     } catch (err) {
       setError(err.message)
     } finally {
@@ -37,14 +30,13 @@ const Home = () => {
   return (
     <>
       <Header />
-
       <Main>
         {loading && <Message>Carregando restaurantes...</Message>}
 
         {!loading && error && (
           <Message>
             {error}
-            <RetryButton type="button" onClick={loadRestaurants}>
+            <RetryButton onClick={loadRestaurants}>
               Tentar novamente
             </RetryButton>
           </Message>
@@ -61,7 +53,6 @@ const Home = () => {
           </RestaurantsGrid>
         )}
       </Main>
-
       <Footer />
     </>
   )

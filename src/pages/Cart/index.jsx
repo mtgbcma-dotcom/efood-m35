@@ -32,7 +32,8 @@ import {
   Summary,
   SummaryRow,
   TotalValue,
-  ClearButton
+  ClearButton,
+  CheckoutLink
 } from './styles'
 
 const formatPrice = (value) =>
@@ -62,9 +63,7 @@ const Cart = () => {
         {items.length === 0 ? (
           <EmptyCart>
             <p>Seu carrinho está vazio.</p>
-            <EmptyLink to="/">
-              Escolher restaurantes
-            </EmptyLink>
+            <EmptyLink to="/">Escolher restaurantes</EmptyLink>
           </EmptyCart>
         ) : (
           <>
@@ -75,27 +74,20 @@ const Cart = () => {
 
                   <ProductInfo>
                     <ProductName>{item.nome}</ProductName>
-
                     <ProductPrice>
                       {formatPrice(item.preco)}
                     </ProductPrice>
 
                     <QuantityArea>
                       <QuantityButton
-                        type="button"
-                        aria-label={`Diminuir quantidade de ${item.nome}`}
                         onClick={() =>
                           dispatch(decreaseQuantity(item.id))
                         }
                       >
                         −
                       </QuantityButton>
-
                       <QuantityValue>{item.quantity}</QuantityValue>
-
                       <QuantityButton
-                        type="button"
-                        aria-label={`Aumentar quantidade de ${item.nome}`}
                         onClick={() =>
                           dispatch(increaseQuantity(item.id))
                         }
@@ -106,7 +98,6 @@ const Cart = () => {
                   </ProductInfo>
 
                   <RemoveButton
-                    type="button"
                     onClick={() =>
                       dispatch(removeFromCart(item.id))
                     }
@@ -123,8 +114,11 @@ const Cart = () => {
                 <TotalValue>{formatPrice(total)}</TotalValue>
               </SummaryRow>
 
+              <CheckoutLink to="/checkout">
+                Continuar para entrega
+              </CheckoutLink>
+
               <ClearButton
-                type="button"
                 onClick={() => dispatch(clearCart())}
               >
                 Limpar carrinho

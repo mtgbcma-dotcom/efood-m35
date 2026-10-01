@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-
 import {
   Overlay,
   ModalBox,
@@ -25,9 +24,7 @@ const ProductModal = ({ dish, onClose, onAdd }) => {
     document.body.classList.add('modal-open')
 
     const handleKeyDown = (event) => {
-      if (event.key === 'Escape') {
-        onClose()
-      }
+      if (event.key === 'Escape') onClose()
     }
 
     window.addEventListener('keydown', handleKeyDown)
@@ -40,28 +37,16 @@ const ProductModal = ({ dish, onClose, onAdd }) => {
 
   if (!dish) return null
 
-  const closeOnOverlay = (event) => {
-    if (event.target === event.currentTarget) {
-      onClose()
-    }
-  }
-
   return (
     <Overlay
       role="dialog"
       aria-modal="true"
-      aria-label={`Detalhes de ${dish.nome}`}
-      onMouseDown={closeOnOverlay}
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) onClose()
+      }}
     >
       <ModalBox>
-        <CloseButton
-          type="button"
-          aria-label="Fechar modal"
-          onClick={onClose}
-        >
-          ×
-        </CloseButton>
-
+        <CloseButton type="button" onClick={onClose}>×</CloseButton>
         <ProductImage src={dish.foto} alt={dish.nome} />
 
         <ProductContent>

@@ -1,4 +1,4 @@
-# eFood - Exercício M37
+# eFood - Exercício M38
 
 Continuação do projeto eFood.
 
@@ -8,19 +8,24 @@ Continuação do projeto eFood.
 - React Router
 - Styled Components
 - AJAX com `fetch`
-- API oficial da EBAC
-- modal de produto
-- Redux Toolkit para o carrinho
-- página de carrinho
-- inclusão de produtos no carrinho
-- alteração de quantidade
-- remoção de produtos
-- total da compra calculado com base nos produtos e quantidades
+- Redux Toolkit
+- carrinho com total
+- página de entrega
+- formulário de pagamento
+- POST para a API de checkout da EBAC
+- tela de confirmação do pedido
+- confirmação preenchida com a resposta da API
 - deploy preparado para Vercel
 
-## API
+## APIs
+
+Restaurantes:
 
 `https://api-ebac.vercel.app/api/efood/restaurantes`
+
+Checkout:
+
+`https://api-ebac.vercel.app/api/efood/checkout`
 
 ## Executar
 

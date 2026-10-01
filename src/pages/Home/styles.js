@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-
 import { colors } from '../../styles'
 
 export const Main = styled.main`
@@ -14,7 +13,6 @@ export const RestaurantsGrid = styled.section`
 
   @media (max-width: 820px) {
     grid-template-columns: 1fr;
-    gap: 32px;
   }
 `
 
@@ -25,7 +23,6 @@ export const Message = styled.div`
   border: 1px solid ${colors.salmon};
   background: ${colors.white};
   text-align: center;
-  line-height: 1.5;
 `
 
 export const RetryButton = styled.button`
@@ -35,5 +32,4 @@ export const RetryButton = styled.button`
   border: 0;
   background: ${colors.salmon};
   color: ${colors.white};
-  font-weight: 700;
 `
